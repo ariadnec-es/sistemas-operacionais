@@ -18,6 +18,7 @@
 
 Processo pai cria processo filho, o qual pode criar outros processos, formando uma árvore de processos. Eles executam concorrentemente, mas o pai espera até o filho terminar.
 
+
 PID - Indentificador de Processos
 
 Comando para verificação de processos no Linux
@@ -88,7 +89,65 @@ Comandos para execução no Linux ex5
 
  
  ##### >>COMUNICAÇÃO
+
+ IPC - Comunicação entre Processos
  
+ **Podem ser:**
+
+ - Independentes: Não podem afetar ou ser afetados pela execução de outros processos.
+ - Cooperantes: Podem afetar ou ser afetados pela execução de outros processos, pois compartilham informações, aumenta a velocidade da computação e melhora a convivência.
+
+*Modelo de comunicação*
+
+![image](https://github.com/ariadnec-es/sistemas-operacionais/assets/84780402/88e4a03f-f4e0-41ab-a7cd-c38e815b5613)
+
+**a)**  Nesse modelo é usado mail-box, caixa de email, o kernel vai todo o processo de comunicação entre os dois processos
+
+**b)** Memória compartilhada: Aqui o Shared var criar um espaço de compartilhamento das informações
+
+1 - Deve ser criado um segmento de memória compartilhada por meio
+
+    int shmget(key_t, int size, int shmflg);
+   
+**Exemplo:**
+
+     segment id = shmget (IPC PRIVATE, size, IPC_CREAT | 0666);
+
+| Parâmetros | Ações |
+| --- | --- |
+| *key_t* |  Chave de acesso que identifica o segmento de memória é compartilhado ou privado  |
+| *size* | É o tamanho do segmento a ser criado em bytes  |
+| *shmflg* | Identifica os direitos de acesso de leitura, escrita e execução |
+| *shmid* | O valor retorna um identificador do segmento de memória |
+
+2 - O processo que deseja acesso a memória compartilhada deve se **ANEXAR/ ACOPLAR** a ela:
+
+    void *shmat(int shmid, const void *shmaddr, int shmflg);
+    
+**Exemplo:**
+
+    shared_memory = (char *) shmat(id, NULL, 0);
+
+| Parâmetros | Ações |
+| --- | --- |
+| *shmid* | Identifica o segmento de memória que se deseja acoplar. Se o valor for NULL ou 0, a memória compartilhada é anexada ao primeiro endereço possível determinado pelo sistema(Comum acontecer) - Ponteiro para memória compartilhada |
+| *shmflg* | Argumento que identifica parâmetros diferentes para o endereçamento, o valor retornado é o endereço do segmento de memória compartilhado. Em caso de erro, o valor retornado é -1 |
+
+3 - Agora o processo pode escrever na memória compartilhada **ESCREVER** na memória e quando terminar, um processo pode desanexar a memória compartilhada do seu espaço de armazenamento.
+
+     sprintf(shared_memory, "teste de mem compartilhada");
+
+Ao terminar, desanexar:
+
+     shmdt(shared_memory);
+
+**Atividade**
+Faça um programa que cria dois processos filhos, o programa deve criar um segmento de memória compartilhado que contém um inteiro, que deve ser inicializado com um valor qualquer. Este inteiro deve ser incrementado pelo filho 1 e um seguida multiplicado por 2 pelo filho 2.
+
+    gcc exercício1.c -o exercício1 
+    \.exercício1
+ [Código - exercício1.c](caminho/arquivo#L13)
+
  ---
 ###### _3. Threads_
  ---
