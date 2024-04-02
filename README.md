@@ -47,37 +47,37 @@ Comandos para execução no Linux ex2
 
     gcc ex2_fork_pid_simples.c -o ex2_fork_pid_simples
     \.ex2_fork_pid_simples
- [Código - ex2_fork_pid_simples.c](caminho/arquivo#L13)
+ [Código - ex2_fork_pid_simples.c](2_GerenciaDeProcessos_Implementação.md#ex2_fork_pid_simplesc)
 
 Comandos para execução no Linux ex3
 
     gcc ex3_fork_exec.c -o ex3_fork_exec
     \.ex3_fork_exec
- [Código - ex3_fork_exec.c](caminho/arquivo#L13)
+ [Código - ex3_fork_exec.c](2_GerenciaDeProcessos_Implementação.md#ex3_fork_execc)
 
 Comandos para execução no Linux ex4
 
     gcc ex4_fork_com_retorno.c -o ex4_fork_com_retorno
     \.ex4_fork_com_retorno
- [Código - ex4_fork_com_retorno.c](caminho/arquivo#L13)
+ [Código - ex4_fork_com_retorno.c](2_GerenciaDeProcessos_Implementação.md#ex4_fork_com_retornoc)
 
 Comandos para execução no Linux ex4
 
     gcc ex4_fork_sleep.c -o ex4_fork_sleep
     \.ex4_fork_sleep
- [Código - ex4_fork_sleep.c](caminho/arquivo#L13)
+ [Código - ex4_fork_sleep.c](2_GerenciaDeProcessos_Implementação.md#ex4_fork_sleepc)
 
 Comandos para execução no Linux ex5
 
     gcc ex5_fork_multiplo1.c -o ex5_fork_multiplo1
     \.ex5_fork_multiplo1
- [Código - ex5_fork_multiplo1.c](caminho/arquivo#L13)
+ [Código - ex5_fork_multiplo1.c](2_GerenciaDeProcessos_Implementação.md#ex5_fork_multiplo_1c)
 
 Comandos para execução no Linux ex5
 
     gcc ex5_fork_multiplo2.c -o ex5_fork_multiplo2
     \.ex5_fork_multiplo2
- [Código - ex5_fork_multiplo2.c](caminho/arquivo#L13)
+ [Código - ex5_fork_multiplo2.c](2_GerenciaDeProcessos_Implementação.md#ex5_fork_multiplo_1c)
 
  Comandos para execução no Linux exercício
 
