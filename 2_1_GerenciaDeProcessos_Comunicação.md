@@ -69,8 +69,12 @@
       
           // Removendo o segmento de memória compartilhada
           shmctl(seg_id, IPC_RMID, NULL);
-          exit(0); // Saindo do processo pai
-          printf("Pai terminou\n"); // Esta linha nunca será alcançada
+          
+          // Saindo do processo pai
+          exit(0); 
+
+          // Esta linha nunca será alcançada
+          printf("Pai terminou\n");
       
           return 0;
       }
