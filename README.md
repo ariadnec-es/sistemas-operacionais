@@ -17,7 +17,8 @@
  ##### >>IMPLEMENTAÇÃO 
 
 Processo pai cria processo filho, o qual pode criar outros processos, formando uma árvore de processos. Eles executam concorrentemente, mas o pai espera até o filho terminar.
- PID - Indentificador de Processos
+
+PID - Indentificador de Processos
 
 Comando para verificação de processos no Linux
 
