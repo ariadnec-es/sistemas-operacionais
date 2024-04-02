@@ -41,7 +41,7 @@ Comandos para execução no Linux ex1
 
     gcc ex1_fork_simple.c -o ex1_fork_simple
     \.ex1_fork_simple
- [Código - ex1_fork_simple.c](caminho/arquivo#L13)
+ [Código - ex1_fork_simple.c](sistemas-operacionais/2_GerenciaDeProcessos_Implementação.md#ex1_fork_simplesc)
 
 Comandos para execução no Linux ex2
 
