@@ -8,21 +8,21 @@
       int main(){
       	pid_t pid;
       	pid = fork();
-      		if(pid<0){
-      			printf("Erro ao criar processo\n");
-      			return 1;
+      	if(pid<0){
+      		printf("Erro ao criar processo\n");
+      		return 1;
       
-      		}
-      		else if(pid == 0){
-      			printf("Esta é a execução do filho\n");
-      			for(;;);
-      		}
-      		else{
-      			printf("O pai está esperando o filho\n");
-      			for(;;);
-      			printf("Processo-Filho finalizou\n");
-      		}
-      	return 0;
+      	}
+      	else if(pid == 0){
+      		printf("Esta é a execução do filho\n");
+      		for(;;);
+      	}
+      	else{
+      		printf("O pai está esperando o filho\n");
+      		for(;;);
+      		printf("Processo-Filho finalizou\n");
+      	}
+            return 0;
       }
 
 # ex2_fork_pid_simples.c
@@ -36,19 +36,19 @@
       int main(){
       	pid_t pid;
       	pid = fork();
-      		if(pid < 0){
-      			printf("Erro ao criar processo\n");
-      			return 1;
+      	if(pid < 0){
+      		printf("Erro ao criar processo\n");
+      		return 1;
       
-      		}
-      		else if(pid == 0){
-      			printf("Esta é a execução do filho(PID=%d), cujo pai tem PID=%d\n", getpid(), getppid());
-      			for(;;);
-      		}
-      		else{
-      			wait(NULL);
-      			printf("Processo-Filho finalizou\n");
-      		}
+      	}
+      	else if(pid == 0){
+      		printf("Esta é a execução do filho(PID=%d), cujo pai tem PID=%d\n", getpid(), getppid());
+      		for(;;);
+      	}
+      	else{
+      		wait(NULL);
+      		printf("Processo-Filho finalizou\n");
+      	}
       	return 0;
       }
 
@@ -62,23 +62,30 @@
       
       int main(){
       	pid_t pid;
+       
+            /* cria outro processo */
       	pid = fork();
-      		if(pid < 0){
-      			fprintf(stderr, "Criação Falhou");
-      			exit(-1);
-      
-      		}
-      		else if(pid == 0){
-      			printf("Esta é a execução do filho(PID=%d), cujo pai tem PID=%d\n       ", getpid(), getppid());
+
+            /* ocorrência de erro*/
+      	if(pid < 0){
+      		fprintf(stderr, "Criação Falhou");
+      		exit(-1);
+      	}
+
+            /* processo filho*/
+      	else if(pid == 0){
+      		printf("Esta é a execução do filho(PID=%d), cujo pai tem PID=%d\n  ", getpid(), getppid());
       				execlp("/bin/ls","ls","-l",NULL);
       				printf("testando o execlp \n");
       				exit(0);
-      		}
-      		else{
-      			wait(NULL);
-      			printf("Processo-Filho finalizou\n");
-      			exit(0);
-      		}
+      	}
+
+            /* processo pai */
+      	else{
+      		wait(NULL);
+      		printf("Processo-Filho finalizou\n");
+      		exit(0);
+      	}
       	return 0;
       }
 
@@ -94,19 +101,19 @@
       	pid_t pid;
       	int retorno;
       	pid = fork();
-      		if(pid < 0){
-      			printf("Erro ao criar processo\n");
-      			return 1;
+      	if(pid < 0){
+      		printf("Erro ao criar processo\n");
+      		return 1;
       
-      		}
-      		else if(pid == 0){
-      			printf("Esta é a execução do filho(PID=%d), cujo pai tem PID=%d\n       ", getpid(), getppid());
-      		}
-      		else{
-      			retorno = wait(NULL);
-      			printf("Processo-Filho finalizou e seu PID era: %d\n", retorno);
-      			exit(0);
-      		}
+      	}
+      	else if(pid == 0){
+      		printf("Esta é a execução do filho(PID=%d), cujo pai tem PID=%d\n  ", getpid(), getppid());
+      	}
+      	else{
+      		retorno = wait(NULL);
+      		printf("Processo-Filho finalizou e seu PID era: %d\n", retorno);
+      		exit(0);
+      	}
       	return 0;
       }
 
@@ -120,21 +127,21 @@
       int main(){
       	pid_t pid;
       	pid = fork();
-      		if(pid<0){
-      			printf("Erro ao criar processo\n");
-      			return 1;
-      		}
-      		else if(pid == 0){
-      			printf("Esta é a execução do Filho\n");
-      			printf("Esperando... \n");
-      			sleep(10);
-      			printf("Voltou!\n");
-      			execlp("/bin/ls","ls","-l",NULL);
-      		}
-      		else{
-      			wait(NULL);
-      			printf("Processo-Filho finalizou\n");
-      		}
+      	if(pid<0){
+      		printf("Erro ao criar processo\n");
+      		return 1;
+      	}
+      	else if(pid == 0){
+      		printf("Esta é a execução do Filho\n");
+      		printf("Esperando... \n");
+      		sleep(10);
+      		printf("Voltou!\n");
+      		execlp("/bin/ls","ls","-l",NULL);
+      	}
+      	else{
+      		wait(NULL);
+      		printf("Processo-Filho finalizou\n");
+      	}
       	return 0;
       }
 
@@ -162,6 +169,8 @@
       	printf("Pai comecou (pid=%d)\n", getpid());
       
       	filho1 = fork();
+
+            //se for o filho...
       	if(!filho1){
       		implementacao_filho1(&a);
       		exit(0);
@@ -196,11 +205,14 @@
       	pid_t pid[5]={-1, -1, -1, -1, -1};
       	int status;
       	pid[0] = fork();
+       
       	if(pid[0]<0){
       		printf("Erro ao criar processo #0\n");
       		return 1;
       	}
-      	if(pid[0] > 0){ //Se for o pai...
+
+            //Se for o pai...
+      	if(pid[0] > 0){ 
       		printf("PAI: criando o segundo processo\n");
       		pid[1] = fork();
       
@@ -209,7 +221,8 @@
       			return 1;
       		}
       	}
-      
+
+            //Os filhos...
       	if(pid[0] == 0){
       		printf("FILHO#0: Criando o processo filho do filho cujo PID é %d\n", getpid());
       		pid[2] = fork();
@@ -230,3 +243,57 @@
       	return 0;
       }
 
+
+# ex6_fork_exercicio1.c
+
+      #include <sys/types.h>
+      #include <sys/wait.h>
+      #include <stdio.h>
+      #include <unistd.h>
+      
+      int main(){
+	pid_t pid[4]={-1, -1, -1, -1};
+	int status,i;
+ 
+	pid[0] = fork();
+ 
+      if (pid[0] < 0){
+		printf("Erro ao criar processo #0\n");
+		return 1;
+	}
+
+      //Se for o pai...
+	if(pid[0] > 0){ 
+		printf("PAI: criando o segundo processo\n");
+		pid[1] = fork();
+        	if (pid[1] < 0){
+			printf("Erro ao criar processo #1\n");
+			return 1;
+		}
+	}
+	//os filhos...
+	if(pid[0] == 0){
+		printf("FILHO#1: Criando o processo filho do filho cujo PID é %d\n", getpid());				
+		pid[2] = fork();
+		for(;;);
+		
+	}
+
+	if(pid[1] == 0){
+		printf("FILHO#2: Criando o processo filho do filho cujo PID é %d\n", getpid());				
+		pid[3] = fork();
+		for(;;);
+
+	}
+
+	
+	if((pid[2] == 0) || (pid[3] == 0)){
+		for(;;);	
+	}
+	else{
+		for(i=0;i<2;i++)
+			status = wait(NULL);
+		printf("Processo-Filho #%d finalizou\n", status);
+	}
+	return 0;
+}
